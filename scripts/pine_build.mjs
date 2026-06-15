@@ -79,16 +79,59 @@ export function indicatorTitle(source) {
   return m ? m[1] : null;
 }
 
-/** The 11 planned build steps, as plain strings — shared by --dry output and the live run. */
+/** The planned build steps, as plain strings — shared by --dry output and the live run. */
 function planSteps(opts, srcPath, exists) {
   const steps = [];
   if (opts.symbol) steps.push(`set symbol → ${opts.symbol} (fast path, bypasses waitForChartReady)`);
-  steps.push('open Pine editor');
+  steps.push('create a fresh indicator script (never reuse/clobber what is open)');
   steps.push(`inject source from ${path.relative(REPO_ROOT, srcPath)}${exists ? '' : '  ⚠️ MISSING'}`);
-  steps.push('compile (smartCompile) + read errors');
+  steps.push('compile + verify it was actually added to the chart');
   if (opts.save) steps.push('save to TradingView account (prefix "AT · ")');
   if (opts.screenshot) steps.push('capture screenshot → screenshots/');
   return steps;
+}
+
+/**
+ * Decide the outcome of a smartCompile() result. Pure — unit-testable without CDP.
+ * - compile errors        → not ok (report the markers)
+ * - study_added === false → not ok (compiled but never reached the chart: a read-only/
+ *                           published script was open, or the wrong button got clicked).
+ *                           Surfaced loudly so the runner never reports false success.
+ * - otherwise             → ok (study_added true = verified; null = count unverifiable)
+ */
+export function interpretCompile(result) {
+  const r = result || {};
+  if (r.has_errors) return { ok: false, reason: 'errors', errors: r.errors || [] };
+  if (r.study_added === false) return { ok: false, reason: 'not_added', button: r.button_clicked || 'unknown' };
+  return { ok: true, verified: r.study_added === true };
+}
+
+/** Screenshot basename WITHOUT extension — captureScreenshot() appends `.png` itself. */
+export function screenshotName(name, stamp) {
+  return `pine_build_${name}_${stamp}`;
+}
+
+/** Number of studies currently on the chart (null if unreadable). Uses `evaluate`. */
+function studyCount(evaluate) {
+  return evaluate(`(function(){try{var c=${CHART_API};if(c&&typeof c.getAllStudies==='function')return c.getAllStudies().length;}catch(e){}return null;})()`);
+}
+
+/**
+ * Click the editor's "Add to chart" button with a LENIENT matcher. TradingView renders
+ * its label duplicated ("Add to chartAdd to chart"), so exact-text matching misses it.
+ * Matches any visible button whose text contains "add to chart" (also catches
+ * "Save and add to chart"). Returns the matched label, or null if none found.
+ */
+function clickAddToChart(evaluate) {
+  return evaluate(`(function(){
+    var btns=document.querySelectorAll('button');
+    for(var i=0;i<btns.length;i++){
+      var b=btns[i];
+      if(b.offsetParent===null) continue;
+      if((b.textContent||'').trim().toLowerCase().indexOf('add to chart')!==-1){ b.click(); return 'add to chart'; }
+    }
+    return null;
+  })()`);
 }
 
 async function main(argv) {
@@ -129,7 +172,7 @@ async function main(argv) {
   const source = fs.readFileSync(srcPath, 'utf8');
 
   // Live path — load CDP + core only now (so --dry / errors never connect).
-  const { evaluateAsync, disconnect } = await import('../src/connection.js');
+  const { evaluate, evaluateAsync, disconnect } = await import('../src/connection.js');
   const pine = await import('../src/core/pine.js');
   const capture = await import('../src/core/capture.js');
 
@@ -138,17 +181,36 @@ async function main(argv) {
       await evaluateAsync(`(function(){var c=${CHART_API};return new Promise(function(r){c.setSymbol(${JSON.stringify(opts.symbol)},{});setTimeout(r,800);});})()`);
     }
 
+    // Always build into a FRESH editable script, so we never reuse or clobber whatever
+    // (possibly read-only / published) script happens to be open in the editor.
+    await pine.newScript({ type: 'indicator' });
     await pine.setSource({ source });
-    await pine.smartCompile();
-    await new Promise((r) => setTimeout(r, 1500));
-    const { error_count, errors } = await pine.getErrors();
 
-    if (error_count > 0) {
-      process.stderr.write(`❌ ${error_count} compile error(s):\n`);
-      for (const e of errors) process.stderr.write(`  line ${e.line}: ${e.message}\n`);
+    // Add to chart with the lenient matcher, then VERIFY the study count rose — this is
+    // the ground truth, not which button was clicked.
+    const before = await studyCount(evaluate);
+    const clicked = await clickAddToChart(evaluate);
+    await new Promise((r) => setTimeout(r, 2500));
+    const after = await studyCount(evaluate);
+    const { errors } = await pine.getErrors();
+    const outcome = interpretCompile({
+      has_errors: errors.length > 0,
+      errors,
+      button_clicked: clicked || 'none',
+      study_added: (before != null && after != null) ? after > before : null,
+    });
+
+    if (!outcome.ok && outcome.reason === 'errors') {
+      process.stderr.write(`❌ ${outcome.errors.length} compile error(s):\n`);
+      for (const e of outcome.errors) process.stderr.write(`  line ${e.line}: ${e.message}\n`);
       return 1;
     }
-    process.stdout.write(`✅ ${opts.name} compiled clean — 0 errors\n`);
+    if (!outcome.ok && outcome.reason === 'not_added') {
+      process.stderr.write(`✗ ${opts.name} compiled clean but was NOT added to the chart (button: ${outcome.button}).\n`);
+      process.stderr.write(`  The Pine editor likely has a read-only / published script open. Open a blank indicator script and retry.\n`);
+      return 1;
+    }
+    process.stdout.write(`✅ ${opts.name} compiled clean and added to chart${outcome.verified ? '' : ' (study count unverified)'}\n`);
 
     if (opts.save) {
       const title = indicatorTitle(source) || opts.name;
@@ -159,9 +221,9 @@ async function main(argv) {
 
     if (opts.screenshot) {
       const stamp = new Date().toISOString().replace(/[:.]/g, '-');
-      const filename = `pine_build_${opts.name}_${stamp}.png`;
+      const filename = screenshotName(opts.name, stamp);
       await capture.captureScreenshot({ region: 'full', filename });
-      process.stdout.write(`📸 screenshots/${filename}\n`);
+      process.stdout.write(`📸 screenshots/${filename}.png\n`);
     }
     return 0;
   } catch (e) {

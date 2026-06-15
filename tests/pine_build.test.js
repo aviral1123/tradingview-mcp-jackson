@@ -5,7 +5,7 @@
 
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
-import { parseArgs, resolveIndicatorPath } from '../scripts/pine_build.mjs';
+import { parseArgs, resolveIndicatorPath, interpretCompile, screenshotName } from '../scripts/pine_build.mjs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { execFileSync } from 'node:child_process';
@@ -55,6 +55,39 @@ describe('pine_build — parseArgs', () => {
 
   it('throws when no indicator name is given', () => {
     assert.throws(() => parseArgs(['--save']), /indicator name/i);
+  });
+});
+
+describe('pine_build — interpretCompile (live-compile outcome, pure)', () => {
+  it('flags compile errors as not-ok', () => {
+    const o = interpretCompile({ has_errors: true, errors: [{ line: 3, message: 'boom' }] });
+    assert.equal(o.ok, false);
+    assert.equal(o.reason, 'errors');
+    assert.equal(o.errors.length, 1);
+  });
+  it('treats compiled-but-not-added as a LOUD failure (no false success)', () => {
+    const o = interpretCompile({ has_errors: false, study_added: false, button_clicked: 'Pine Save' });
+    assert.equal(o.ok, false);
+    assert.equal(o.reason, 'not_added');
+    assert.equal(o.button, 'Pine Save');
+  });
+  it('passes when the study was verifiably added', () => {
+    const o = interpretCompile({ has_errors: false, study_added: true });
+    assert.equal(o.ok, true);
+    assert.equal(o.verified, true);
+  });
+  it('passes but marks unverified when the study count is unknown (null)', () => {
+    const o = interpretCompile({ has_errors: false, study_added: null });
+    assert.equal(o.ok, true);
+    assert.equal(o.verified, false);
+  });
+});
+
+describe('pine_build — screenshotName (no double extension)', () => {
+  it('returns a basename with no .png suffix (captureScreenshot adds it)', () => {
+    const n = screenshotName('bias-stack', '2026-06-15T03-45-28-455Z');
+    assert.equal(n, 'pine_build_bias-stack_2026-06-15T03-45-28-455Z');
+    assert.doesNotMatch(n, /\.png$/);
   });
 });
 
