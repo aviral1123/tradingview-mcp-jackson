@@ -1,0 +1,25 @@
+//@version=6
+// ZCT OI Filter — the article's open-interest momentum indicator.
+// Plots dollar-denominated open interest with fast/slow EMAs and a shaded fill that
+// flips green/red by which EMA is on top. Needs a symbol that HAS open interest
+// (crypto perps / futures, e.g. BINANCE:BTCUSDT.P) — on equities the OI plot is na.
+//
+// This indicator exists to PROVE the scaffold is generic: it was added with zero
+// changes to scripts/pine_build.mjs.
+indicator("ZCT OI Filter", overlay = false)
+
+fastLen = input.int(60, "Fast EMA", minval = 1)
+slowLen = input.int(240, "Slow EMA", minval = 1)
+
+oiTicker = str.tostring(syminfo.tickerid) + "_OI"
+oi       = request.security(oiTicker, timeframe.period, close, ignore_invalid_symbol = true)
+oiDollar = oi * close
+
+fast = ta.ema(oiDollar, fastLen)
+slow = ta.ema(oiDollar, slowLen)
+
+plot(oiDollar, "OI ($)", color = color.new(color.yellow, 0))
+pf = plot(fast, "Fast EMA", color = color.new(color.blue, 0))
+ps = plot(slow, "Slow EMA", color = color.new(color.green, 0))
+
+fill(pf, ps, color = fast > slow ? color.new(color.green, 85) : color.new(color.red, 85), title = "Momentum fill")

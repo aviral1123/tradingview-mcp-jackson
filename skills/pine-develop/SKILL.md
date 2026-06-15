@@ -17,17 +17,16 @@ If not already clear, ask the user:
 
 ## Step 2: Pull Current Source (if modifying)
 
-If modifying an existing script:
-```bash
-node scripts/pine_pull.js
-```
-Then read `scripts/current.pine` to understand what's there.
+Indicators live in `indicators/<name>/source.pine` — read that directly.
+To read whatever is currently loaded in the live TradingView Pine editor instead, use the
+`pine_get_source` MCP tool (or `node src/cli/index.js pine get`).
 
-If creating new: start from scratch.
+If creating new: make `indicators/<name>/` with a `source.pine` + `spec.md`
+(see `indicators/README.md` for the contract).
 
 ## Step 3: Write the Pine Script
 
-Write the complete script to `scripts/current.pine`. Every script MUST include:
+Write the complete script to `indicators/<name>/source.pine`. Every script MUST include:
 - `//@version=6` header
 - Proper `indicator()` or `strategy()` declaration
 - All user inputs with `input.*()` functions and groups
@@ -38,20 +37,21 @@ For strategies, include:
 - Position sizing via `strategy()` declaration
 - Default commission and slippage settings
 
-## Step 4: Push and Compile
+## Step 4: Build and Compile
 
 ```bash
-node scripts/pine_push.js
+node scripts/pine_build.mjs <name>
 ```
 
-This injects the code into TradingView's Pine Editor, clicks compile, and reports any errors.
+This injects `indicators/<name>/source.pine` into the Pine Editor, compiles, and reports any
+errors. Add `--symbol <SYM>` to switch the chart first; `--save` to save to your account.
 
 ## Step 5: Fix Errors
 
 If errors are reported:
 1. Read the error messages (line number + description)
-2. Edit `scripts/current.pine` locally — fix the specific lines
-3. Push again: `node scripts/pine_push.js`
+2. Edit `indicators/<name>/source.pine` — fix the specific lines
+3. Build again: `node scripts/pine_build.mjs <name>`
 4. Repeat until 0 errors
 
 Common Pine Script errors:
@@ -70,9 +70,8 @@ After clean compilation:
 ## Step 7: Iterate
 
 If the user wants changes:
-1. Pull fresh: `node scripts/pine_pull.js` (in case TV modified anything)
-2. Edit locally
-3. Push + compile
-4. Screenshot to verify
+1. Edit `indicators/<name>/source.pine`
+2. Build + compile: `node scripts/pine_build.mjs <name> --screenshot`
+3. Check the screenshot to verify
 
 IMPORTANT: Always compile after every change. Never claim "done" without a clean compile.

@@ -1,0 +1,24 @@
+//@version=6
+// Bias Stack — renders rules.json bias logic on the chart.
+// Bullish stack  = price > 50 EMA AND 20 EMA > 50 EMA AND RSI > 50  (green bg)
+// Bearish stack  = price < 50 EMA AND 20 EMA < 50 EMA AND RSI < 50  (red bg)
+// ▲ marks where RSI crosses up through 50 — the entry trigger.
+indicator("Bias Stack", overlay = true)
+
+emaFast = input.int(20, "EMA fast", minval = 1)
+emaSlow = input.int(50, "EMA slow", minval = 1)
+rsiLen  = input.int(14, "RSI length", minval = 1)
+
+e20 = ta.ema(close, emaFast)
+e50 = ta.ema(close, emaSlow)
+r   = ta.rsi(close, rsiLen)
+
+bull = close > e50 and e20 > e50 and r > 50
+bear = close < e50 and e20 < e50 and r < 50
+
+plot(e20, "EMA fast", color = color.new(color.blue, 0), linewidth = 2)
+plot(e50, "EMA slow", color = color.new(color.orange, 0), linewidth = 2)
+
+bgcolor(bull ? color.new(color.green, 90) : bear ? color.new(color.red, 90) : na, title = "Bias shading")
+
+plotshape(ta.crossover(r, 50), title = "RSI 50 cross up", style = shape.triangleup, location = location.belowbar, color = color.new(color.green, 0), size = size.tiny)
