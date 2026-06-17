@@ -227,7 +227,7 @@ export async function launch({ port, kill_existing } = {}) {
     try {
       const http = await import('http');
       const ready = await new Promise((resolve) => {
-        http.get(`http://localhost:${cdpPort}/json/version`, (res) => {
+        http.get(`http://127.0.0.1:${cdpPort}/json/version`, (res) => {
           let data = '';
           res.on('data', (chunk) => data += chunk);
           res.on('end', () => resolve(data));

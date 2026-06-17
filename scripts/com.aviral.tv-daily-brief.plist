@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  TradingView daily brief — macOS LaunchAgent.
+  Advisory only: reads your charts and reports what YOUR rules say. Never trades.
+  Fires weekdays at 08:45 local time. Requires TradingView Desktop running (CDP on
+  127.0.0.1:9222) at fire time; if not reachable, the script sends a heads-up to Telegram.
+
+  Install:   cp scripts/com.aviral.tv-daily-brief.plist ~/Library/LaunchAgents/
+             launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.aviral.tv-daily-brief.plist
+  Inspect:   launchctl print gui/$(id -u)/com.aviral.tv-daily-brief
+  Run now:   launchctl kickstart -k gui/$(id -u)/com.aviral.tv-daily-brief
+  Remove:    launchctl bootout gui/$(id -u)/com.aviral.tv-daily-brief && rm ~/Library/LaunchAgents/com.aviral.tv-daily-brief.plist
+  Retime:    edit StartCalendarInterval below (Weekday 1-5 = Mon-Fri), then bootout + bootstrap again.
+-->
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.aviral.tv-daily-brief</string>
+
+    <key>ProgramArguments</key>
+    <array>
+        <string>/opt/homebrew/bin/node</string>
+        <string>/Users/aviral/ClaudeProjects/tradingview-mcp-jackson/scripts/daily_brief.mjs</string>
+    </array>
+
+    <key>WorkingDirectory</key>
+    <string>/Users/aviral/ClaudeProjects/tradingview-mcp-jackson</string>
+
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>PATH</key>
+        <string>/opt/homebrew/bin:/usr/bin:/bin</string>
+    </dict>
+
+    <key>StartCalendarInterval</key>
+    <array>
+        <dict><key>Weekday</key><integer>1</integer><key>Hour</key><integer>8</integer><key>Minute</key><integer>45</integer></dict>
+        <dict><key>Weekday</key><integer>2</integer><key>Hour</key><integer>8</integer><key>Minute</key><integer>45</integer></dict>
+        <dict><key>Weekday</key><integer>3</integer><key>Hour</key><integer>8</integer><key>Minute</key><integer>45</integer></dict>
+        <dict><key>Weekday</key><integer>4</integer><key>Hour</key><integer>8</integer><key>Minute</key><integer>45</integer></dict>
+        <dict><key>Weekday</key><integer>5</integer><key>Hour</key><integer>8</integer><key>Minute</key><integer>45</integer></dict>
+    </array>
+
+    <key>RunAtLoad</key>
+    <false/>
+
+    <!-- Run un-throttled: without this, launchd gives scheduled jobs Background QoS,
+         which slowed the 50-symbol sweep ~6x (the chart churns far longer). -->
+    <key>ProcessType</key>
+    <string>Interactive</string>
+    <key>Nice</key>
+    <integer>0</integer>
+    <key>LowPriorityIO</key>
+    <false/>
+
+    <key>StandardOutPath</key>
+    <string>/Users/aviral/ClaudeProjects/tradingview-mcp-jackson/logs/daily_brief.log</string>
+    <key>StandardErrorPath</key>
+    <string>/Users/aviral/ClaudeProjects/tradingview-mcp-jackson/logs/daily_brief.log</string>
+</dict>
+</plist>
