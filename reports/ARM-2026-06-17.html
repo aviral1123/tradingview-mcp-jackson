@@ -1,0 +1,120 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ARM — TV Terminal Technicals</title><style>
+:root{--bg:#07090c;--panel:#0d1117;--panel2:#0a0e13;--line:#1c2530;--grid:#161d27;
+--amber:#f7a600;--amber2:#ffc24b;--txt:#d6deeb;--dim:#7d8a9c;--up:#19d27e;--down:#ff4d4f;--warn:#f7a600;--cyan:#34d3eb;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--txt);
+font:13px/1.5 "SF Mono",ui-monospace,"Cascadia Mono",Menlo,Consolas,monospace;
+-webkit-font-smoothing:antialiased;letter-spacing:.2px}
+a{color:var(--cyan);text-decoration:none}a:hover{text-decoration:underline}
+.wrap{max-width:1080px;margin:0 auto;padding:0 16px 56px}
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:16px;
+border-bottom:2px solid var(--amber);padding:10px 16px;background:linear-gradient(180deg,#0d1117,#080b0f);
+position:sticky;top:0;z-index:5}
+.brand{color:var(--amber);font-weight:700;letter-spacing:2px}
+.brand .sub{color:var(--dim);font-weight:400;letter-spacing:1px;margin-left:8px}
+.tape{color:var(--dim);font-size:12px}
+.tape b{color:var(--txt)}
+.px{font-size:20px;font-weight:700}
+.sec{margin:22px 0 8px;color:var(--amber);font-size:11px;font-weight:700;letter-spacing:2.5px;
+text-transform:uppercase;border-bottom:1px solid var(--line);padding-bottom:6px;display:flex;justify-content:space-between}
+.sec .meta{color:var(--dim);font-weight:400;letter-spacing:1px}
+.grid{display:grid;gap:10px}
+.g2{grid-template-columns:1fr 1fr}.g4{grid-template-columns:repeat(4,1fr)}
+@media(max-width:760px){.g2,.g4{grid-template-columns:1fr}}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:3px;padding:12px 14px}
+.kv{display:flex;justify-content:space-between;gap:12px;padding:3px 0;border-bottom:1px dotted var(--grid)}
+.kv:last-child{border-bottom:0}.kv .k{color:var(--dim)}.kv .v{color:var(--txt);font-variant-numeric:tabular-nums;text-align:right}
+.up{color:var(--up)}.down{color:var(--down)}.warn{color:var(--warn)}.amber{color:var(--amber)}
+.stance{background:linear-gradient(90deg,rgba(247,166,0,.10),rgba(247,166,0,0));border-left:3px solid var(--amber);
+padding:12px 16px;margin:14px 0;font-size:14px;color:var(--amber2)}
+.chip{display:inline-block;padding:2px 9px;border-radius:3px;font-weight:700;font-size:11px;letter-spacing:1.5px}
+.chip.BUY{background:rgba(25,210,126,.16);color:var(--up);border:1px solid rgba(25,210,126,.5)}
+.chip.WATCHLIST{background:rgba(247,166,0,.16);color:var(--amber);border:1px solid rgba(247,166,0,.5)}
+.chip.AVOID{background:rgba(255,77,79,.16);color:var(--down);border:1px solid rgba(255,77,79,.5)}
+.card{background:var(--panel);border:1px solid var(--line);border-top:2px solid var(--rt,#666);border-radius:3px;padding:11px 13px}
+.card .lens{color:var(--dim);font-size:11px;letter-spacing:1.5px;text-transform:uppercase}
+.card .rate{font-weight:700;letter-spacing:1px;margin:4px 0 6px}
+.card .txt{color:var(--txt);font-size:12.5px}
+.rt-PASS{--rt:var(--up)}.rt-WARN{--rt:var(--amber)}.rt-FAIL{--rt:var(--down)}
+.rate.PASS{color:var(--up)}.rate.WARN{color:var(--amber)}.rate.FAIL{color:var(--down)}
+table{width:100%;border-collapse:collapse;font-size:12.5px}
+th,td{text-align:left;padding:7px 10px;border-bottom:1px solid var(--grid)}
+th{color:var(--dim);font-weight:600;font-size:11px;letter-spacing:1px;text-transform:uppercase}
+td.r,th.r{text-align:right;font-variant-numeric:tabular-nums}
+tr:hover td{background:#0b1118}
+.crit td:first-child{color:var(--dim)}
+.bul{margin:0;padding-left:18px}.bul li{margin:4px 0}
+.lvl{font-variant-numeric:tabular-nums}
+.foot{color:var(--dim);font-size:11px;margin-top:26px;border-top:1px solid var(--line);padding-top:10px}
+.src a{display:inline-block;margin:0 10px 6px 0}
+.flips li{color:var(--up)}
+</style></head><body>
+<div class="topbar">
+  <div class="brand">TV·TERMINAL<span class="sub">EQUITY TECHNICALS</span></div>
+  <div class="tape">ARM <b>434.00</b> <span class="up">+9.5%</span>
+   &nbsp;·&nbsp; vs <b>QQQ</b> &nbsp;·&nbsp; 2026-06-17 18:40 UTC</div>
+</div>
+<div class="wrap">
+  <div class="sec" style="margin-top:18px">Verdict <span class="meta">Stage 2 (late / climax-extended)</span></div>
+  <div><span class="chip WATCHLIST">WATCHLIST</span></div>
+  <div class="stance">Elite, genuinely re-rating AI leader (7/7 template, RS line at new highs) — but parabolic: +94.5% in 20d, 67.6% above the 50-day, on thinning volume, and trading 45-70% above every analyst target. Don't chase; own-and-trail if long, stalk the next base if flat.</div>
+
+  <div class="sec">Four-Lens Scorecard</div>
+  <div class="grid g4"><div class="card rt-PASS"><div class="lens">Minervini Trend Template</div><div class="rate PASS">✓ PASS</div><div class="txt">Rare clean 7/7 — textbook Stage 2 leader, MAs stacked 50&gt;150&gt;200, at 52w high. BUT +67.6% above the 50-day = climax extension; passes the template yet NOT buyable here.</div></div><div class="card rt-PASS"><div class="lens">Relative Strength vs QQQ</div><div class="rate PASS">✓ PASS</div><div class="txt">Elite &amp; leading, not recovering: excess +95/175/192/124% (1/3/6/12m), RS line at 100% of 1y range and rising, Mansfield +60.5%. True market leader.</div></div><div class="card rt-WARN"><div class="lens">Volume / Accumulation</div><div class="rate WARN">⚠ WARN</div><div class="txt">Strong accumulation base (U/D 2.27 25d, only 3 dist days) — but the parabolic thrust is on THINNING volume (latest +9.5% on 0.64x): classic buying-climax tell.</div></div><div class="card rt-WARN"><div class="lens">Catalyst (Exa)</div><div class="rate WARN">⚠ WARN</div><div class="txt">Real re-rating — AGI own-silicon CPU, record Q4, data-center royalties doubling, Nvidia Vera/AI-PC on Arm IP. But price ~45-70% above ~$236-259 consensus target; P/E ~350-450x, insider selling, FTC overhang.</div></div></div>
+
+  <div class="sec">Trend Template <span class="meta">PASS (Stage 2 candidate)</span></div>
+  <div class="grid g2">
+    <div class="panel"><table><thead><tr><th>#</th><th>Criterion (Minervini)</th><th class="r">State</th></tr></thead><tbody><tr class="crit"><td>1</td><td>Price &gt; 150-day &amp; 200-day MA</td><td class="r up">PASS</td></tr><tr class="crit"><td>2</td><td>150-day MA &gt; 200-day MA</td><td class="r up">PASS</td></tr><tr class="crit"><td>3</td><td>200-day MA trending up</td><td class="r up">PASS</td></tr><tr class="crit"><td>4</td><td>50-day &gt; 150 &amp; 200-day MA</td><td class="r up">PASS</td></tr><tr class="crit"><td>5</td><td>Price &gt; 50-day MA</td><td class="r up">PASS</td></tr><tr class="crit"><td>6</td><td>Price ≥30% above 52-wk low</td><td class="r up">PASS</td></tr><tr class="crit"><td>7</td><td>Price within 25% of 52-wk high</td><td class="r up">PASS</td></tr><tr class="crit"><td>8</td><td>RS Rating ≥70 vs market</td><td class="r warn">SEE RS</td></tr></tbody></table></div>
+    <div class="panel">
+      <div class="kv"><span class="k">SMA 50 / 150 / 200</span><span class="v">259.02 / 169.93 / 166.37</span></div>
+      <div class="kv"><span class="k">52-week range</span><span class="v">100.02 – 434.81</span></div>
+      <div class="kv"><span class="k">Above 52-wk low</span><span class="v up">+333.9%</span></div>
+      <div class="kv"><span class="k">Below 52-wk high</span><span class="v down">−0.2%</span></div>
+      <div class="kv"><span class="k">200-day rising</span><span class="v up">YES</span></div>
+      <div class="kv"><span class="k">MA stacked 50&gt;150&gt;200</span><span class="v up">YES</span></div>
+      <div class="kv"><span class="k">RSI(14) / ATR(14)</span><span class="v">68.28 / 34.54 (8.0%)</span></div>
+      <div class="kv"><span class="k">Chg 1d / 5d / 20d</span><span class="v"><span class="up">+9.5%</span> · <span class="up">+41.2%</span> · <span class="up">+94.5%</span></span></div>
+    </div>
+  </div>
+
+  <div class="sec">Relative Strength <span class="meta">vs QQQ</span></div>
+  <div class="grid g2"><div class="panel">
+    <div class="kv"><span class="k">Excess return 1m / 3m</span><span class="v"><span class="up">+95.0%</span> · <span class="up">+175.4%</span></span></div>
+    <div class="kv"><span class="k">Excess return 6m / 12m</span><span class="v"><span class="up">+191.7%</span> · <span class="up">+123.5%</span></span></div>
+    <div class="kv"><span class="k">RS line / % of 1y range</span><span class="v">0.5942 · 100%</span></div>
+  </div><div class="panel">
+    <div class="kv"><span class="k">RS line above own 50d</span><span class="v up">YES (Mansfield +60.5%)</span></div>
+    <div class="kv"><span class="k">RS line rising (21d)</span><span class="v up">YES</span></div>
+    <div class="kv"><span class="k">Read</span><span class="v warn">LEADING</span></div>
+  </div></div>
+
+  <div class="sec">Volume / Accumulation</div>
+  <div class="grid g2"><div class="panel">
+    <div class="kv"><span class="k">50d avg volume</span><span class="v">11.2M</span></div>
+    <div class="kv"><span class="k">Last vol vs avg</span><span class="v down">0.64×</span></div>
+    <div class="kv"><span class="k">Up/Down vol 25d / 50d</span><span class="v"><span class="up">2.27</span> · <span class="up">1.92</span></span></div>
+    <div class="kv"><span class="k">Distribution days (25d)</span><span class="v ">3 </span></div>
+  </div><div class="panel">
+    <table><thead><tr><th>Last 8 bars</th><th class="r">Δ%</th><th class="r">Vol×avg</th></tr></thead><tbody>
+    <tr><td class="r">346.39</td><td class="r up">+1.0%</td><td class="r ">0.81×</td></tr><tr><td class="r">324.86</td><td class="r down">-6.2%</td><td class="r up">1.20×</td></tr><tr><td class="r">307.43</td><td class="r down">-5.4%</td><td class="r down">0.72×</td></tr><tr><td class="r">342.23</td><td class="r up">+11.3%</td><td class="r down">0.79×</td></tr><tr><td class="r">380.81</td><td class="r up">+11.3%</td><td class="r up">1.47×</td></tr><tr><td class="r">412.55</td><td class="r up">+8.3%</td><td class="r up">1.25×</td></tr><tr><td class="r">396.34</td><td class="r down">-3.9%</td><td class="r ">1.11×</td></tr><tr><td class="r">434.00</td><td class="r up">+9.5%</td><td class="r down">0.64×</td></tr>
+    </tbody></table>
+  </div></div>
+
+  <div class="sec">Levels &amp; Game Plan</div>
+  <div class="grid g2"><div class="panel"><div class="kv"><span class="k down">R · 52-wk / all-time high — blue sky above</span><span class="v lvl">434.81</span></div><div class="kv"><span class="k up">S · last reaction low (near-term)</span><span class="v lvl">396.00</span></div><div class="kv"><span class="k up">S · this leg's launch shelf / 21-day area</span><span class="v lvl">350.00</span></div><div class="kv"><span class="k up">S · 50-day SMA — mean-reversion magnet</span><span class="v lvl">259.00</span></div></div>
+  <div class="panel">
+    <div class="kv"><span class="k amber">Watch (stalk entry)</span><span class="v">No clean entry here. Wait for a multi-week base + volatility contraction; pivot 3-5% off a rising 50/21-day on dry volume</span></div>
+    <div class="kv"><span class="k down">Invalidation</span><span class="v">Climax-reversal trigger: largest up-day/week then break of 21-day EMA; losing ~$350 shelf signals the parabola topped</span></div>
+    <div style="margin-top:8px;color:var(--dim);font-size:11px;letter-spacing:1px">WHAT FLIPS IT TO A BUY</div>
+    <ul class="bul flips"><li>Multi-week base / VCP forms — ATR compresses from 8%</li><li>Volume dries up into a tight pivot, then high-volume breakout</li><li>Price digests toward a rising 50/21-day so a sane stop exists</li><li>Consensus targets catch up to price (reduces air-pocket risk)</li></ul>
+  </div></div>
+
+  <div class="sec">Catalyst <span class="meta">Exa news scan</span></div>
+  <div class="panel"><ul class="bul"><li>AGI CPU — Arm's first own-silicon (Mar 24 'Arm Everywhere', Meta lead partner): CEO guides $25B rev by 2031 vs ~$4B in 2025. Thesis change from pure IP licensing.</li><li>Record Q4 FY26 (May 6): rev $1.49B +20% YoY, licensing +29%, data-center royalties &gt;2x YoY; committed AGI CPU demand &gt;$2B FY27-28 (doubled in 6 weeks).</li><li>Nvidia 'Vera' data-center CPU + RTX Spark AI-PC both built on Arm IP — forces re-rating of Arm royalty power; +18% on Jun 1.</li><li>Wave of analyst PT hikes (Mizuho $500, Wells $410, BofA $335...) — but reactive, chasing the move.</li><li>FROTH: price ~45-70% above ~$236-259 consensus target; P/E ~350-450x, ~74x sales; insider selling ~$66M/90d; FTC licensing probe overhang.</li></ul>
+    <div class="src" style="margin-top:8px"><a href="https://newsroom.arm.com/news/arm-q4-fye26-results" target="_blank">Arm Q4 FYE26 record results · May 6 2026</a><a href="https://www.cnbc.com/2026/03/24/arm-stock-pops-haas-chip-cpu.html" target="_blank">CNBC — Haas $25B revenue / AGI CPU · Mar 24 2026</a><a href="https://www.fool.com/investing/2026/06/03/why-arm-stock-is-up-best-ai-stocks/" target="_blank">Motley Fool — why ARM skyrocketed · Jun 3 2026</a><a href="https://247wallst.com/investing/2026/06/01/arm-holdings-rockets-18-microsoft-dell-rise-on-rtx-spark-ai-pc-launch/" target="_blank">24/7 Wall St — +18% on RTX Spark AI-PC · Jun 1 2026</a><a href="https://simplywall.st/stocks/us/semiconductors/nasdaq-arm/arm-holdings/news/arms-agi-cpu-shift-rewrites-ai-data-center-valuation-story/amp" target="_blank">Simply Wall St — AGI CPU valuation / ~48% above target · Jun 13 2026</a><a href="https://www.benzinga.com/quote/ARM/analyst-ratings" target="_blank">Benzinga — consensus target ~$236 · Jun 12 2026</a></div></div>
+
+  <div class="foot">Generated 2026-06-17 18:40 UTC by agentic-ta · computed from raw bars, not chart indicators · latest bar may be intraday/partial.<br>
+  Technical / price-structure read only — <b>not financial advice.</b></div>
+</div></body></html>

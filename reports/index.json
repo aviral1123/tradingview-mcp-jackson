@@ -1,0 +1,26 @@
+[
+  {
+    "symbol": "CRWV",
+    "date": "2026-06-17",
+    "price": 120.29,
+    "verdict": "WATCHLIST",
+    "stage": "Stage 2 (early / immature)",
+    "tt_score": 5,
+    "rs_1m": 11.6,
+    "dist_days": 5,
+    "stance": "Right stock, right stage, wrong spot — this pop is a Nasdaq-100 flows event on thin volume, not a fundamental breakout. Don't chase; stalk the post-inclusion base.",
+    "report": "CRWV-2026-06-17.html"
+  },
+  {
+    "symbol": "ARM",
+    "date": "2026-06-17",
+    "price": 434,
+    "verdict": "WATCHLIST",
+    "stage": "Stage 2 (late / climax-extended)",
+    "tt_score": 7,
+    "rs_1m": 95,
+    "dist_days": 3,
+    "stance": "Elite, genuinely re-rating AI leader (7/7 template, RS line at new highs) — but parabolic: +94.5% in 20d, 67.6% above the 50-day, on thinning volume, and trading 45-70% above every analyst target. Don't chase; own-and-trail if long, stalk the next base if flat.",
+    "report": "ARM-2026-06-17.html"
+  }
+]

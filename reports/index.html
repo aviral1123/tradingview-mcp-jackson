@@ -1,0 +1,95 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TV Terminal — Coverage</title><style>
+:root{--bg:#07090c;--panel:#0d1117;--panel2:#0a0e13;--line:#1c2530;--grid:#161d27;
+--amber:#f7a600;--amber2:#ffc24b;--txt:#d6deeb;--dim:#7d8a9c;--up:#19d27e;--down:#ff4d4f;--warn:#f7a600;--cyan:#34d3eb;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--txt);
+font:13px/1.5 "SF Mono",ui-monospace,"Cascadia Mono",Menlo,Consolas,monospace;
+-webkit-font-smoothing:antialiased;letter-spacing:.2px}
+a{color:var(--cyan);text-decoration:none}a:hover{text-decoration:underline}
+.wrap{max-width:1080px;margin:0 auto;padding:0 16px 56px}
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:16px;
+border-bottom:2px solid var(--amber);padding:10px 16px;background:linear-gradient(180deg,#0d1117,#080b0f);
+position:sticky;top:0;z-index:5}
+.brand{color:var(--amber);font-weight:700;letter-spacing:2px}
+.brand .sub{color:var(--dim);font-weight:400;letter-spacing:1px;margin-left:8px}
+.tape{color:var(--dim);font-size:12px}
+.tape b{color:var(--txt)}
+.px{font-size:20px;font-weight:700}
+.sec{margin:22px 0 8px;color:var(--amber);font-size:11px;font-weight:700;letter-spacing:2.5px;
+text-transform:uppercase;border-bottom:1px solid var(--line);padding-bottom:6px;display:flex;justify-content:space-between}
+.sec .meta{color:var(--dim);font-weight:400;letter-spacing:1px}
+.grid{display:grid;gap:10px}
+.g2{grid-template-columns:1fr 1fr}.g4{grid-template-columns:repeat(4,1fr)}
+@media(max-width:760px){.g2,.g4{grid-template-columns:1fr}}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:3px;padding:12px 14px}
+.kv{display:flex;justify-content:space-between;gap:12px;padding:3px 0;border-bottom:1px dotted var(--grid)}
+.kv:last-child{border-bottom:0}.kv .k{color:var(--dim)}.kv .v{color:var(--txt);font-variant-numeric:tabular-nums;text-align:right}
+.up{color:var(--up)}.down{color:var(--down)}.warn{color:var(--warn)}.amber{color:var(--amber)}
+.stance{background:linear-gradient(90deg,rgba(247,166,0,.10),rgba(247,166,0,0));border-left:3px solid var(--amber);
+padding:12px 16px;margin:14px 0;font-size:14px;color:var(--amber2)}
+.chip{display:inline-block;padding:2px 9px;border-radius:3px;font-weight:700;font-size:11px;letter-spacing:1.5px}
+.chip.BUY{background:rgba(25,210,126,.16);color:var(--up);border:1px solid rgba(25,210,126,.5)}
+.chip.WATCHLIST{background:rgba(247,166,0,.16);color:var(--amber);border:1px solid rgba(247,166,0,.5)}
+.chip.AVOID{background:rgba(255,77,79,.16);color:var(--down);border:1px solid rgba(255,77,79,.5)}
+.card{background:var(--panel);border:1px solid var(--line);border-top:2px solid var(--rt,#666);border-radius:3px;padding:11px 13px}
+.card .lens{color:var(--dim);font-size:11px;letter-spacing:1.5px;text-transform:uppercase}
+.card .rate{font-weight:700;letter-spacing:1px;margin:4px 0 6px}
+.card .txt{color:var(--txt);font-size:12.5px}
+.rt-PASS{--rt:var(--up)}.rt-WARN{--rt:var(--amber)}.rt-FAIL{--rt:var(--down)}
+.rate.PASS{color:var(--up)}.rate.WARN{color:var(--amber)}.rate.FAIL{color:var(--down)}
+table{width:100%;border-collapse:collapse;font-size:12.5px}
+th,td{text-align:left;padding:7px 10px;border-bottom:1px solid var(--grid)}
+th{color:var(--dim);font-weight:600;font-size:11px;letter-spacing:1px;text-transform:uppercase}
+td.r,th.r{text-align:right;font-variant-numeric:tabular-nums}
+tr:hover td{background:#0b1118}
+.crit td:first-child{color:var(--dim)}
+.bul{margin:0;padding-left:18px}.bul li{margin:4px 0}
+.lvl{font-variant-numeric:tabular-nums}
+.foot{color:var(--dim);font-size:11px;margin-top:26px;border-top:1px solid var(--line);padding-top:10px}
+.src a{display:inline-block;margin:0 10px 6px 0}
+.flips li{color:var(--up)}
+
+.wrap{max-width:1280px}.stat{display:flex;gap:22px;margin:16px 0}
+.stat .b{background:var(--panel);border:1px solid var(--line);border-radius:3px;padding:10px 16px;min-width:96px}
+.stat .n{font-size:22px;font-weight:700}.stat .l{color:var(--dim);font-size:11px;letter-spacing:1.5px}
+</style></head><body>
+<div class="topbar"><div class="brand">TV·TERMINAL<span class="sub">COVERAGE · WATCHLIST</span></div>
+<div class="tape">2 symbol(s) tracked &nbsp;·&nbsp; updated 2026-06-17 18:40 UTC</div></div>
+<div class="wrap">
+  <div class="stat">
+    <div class="b"><div class="n">2</div><div class="l">TRACKED</div></div>
+    <div class="b"><div class="n up">0</div><div class="l">BUY</div></div>
+    <div class="b"><div class="n amber">2</div><div class="l">WATCHLIST</div></div>
+    <div class="b"><div class="n down">0</div><div class="l">AVOID</div></div>
+  </div>
+  <div class="sec">Coverage</div>
+  <table><thead><tr>
+    <th>Symbol</th><th>Last analyzed</th><th class="r">Price</th><th>Verdict</th><th>Stage</th>
+    <th class="r">Trend Tmpl</th><th class="r">RS 1m</th><th class="r">Dist d</th><th>Stance</th><th>Report</th>
+  </tr></thead><tbody><tr>
+    <td><a href="ARM-2026-06-17.html">ARM</a></td>
+    <td>2026-06-17</td>
+    <td class="r">434.00</td>
+    <td><span class="chip WATCHLIST">WATCHLIST</span></td>
+    <td>Stage 2 (late / climax-extended)</td>
+    <td class="r">7/7</td>
+    <td class="r up">+95.0%</td>
+    <td class="r ">3</td>
+    <td style="color:var(--dim);max-width:340px">Elite, genuinely re-rating AI leader (7/7 template, RS line at new highs) — but parabolic: +94.5% in 20d, 67.6% above the 50-day, on thinning volume, and trading 45-70% above every analyst target. Don't chase; own-and-trail if long, stalk the next base if flat.</td>
+    <td><a href="ARM-2026-06-17.html">view ▸</a></td>
+  </tr><tr>
+    <td><a href="CRWV-2026-06-17.html">CRWV</a></td>
+    <td>2026-06-17</td>
+    <td class="r">120.29</td>
+    <td><span class="chip WATCHLIST">WATCHLIST</span></td>
+    <td>Stage 2 (early / immature)</td>
+    <td class="r">5/7</td>
+    <td class="r up">+11.6%</td>
+    <td class="r down">5</td>
+    <td style="color:var(--dim);max-width:340px">Right stock, right stage, wrong spot — this pop is a Nasdaq-100 flows event on thin volume, not a fundamental breakout. Don't chase; stalk the post-inclusion base.</td>
+    <td><a href="CRWV-2026-06-17.html">view ▸</a></td>
+  </tr></tbody></table>
+  <div class="foot">agentic-ta coverage ledger · technical reads only, not financial advice.</div>
+</div></body></html>
