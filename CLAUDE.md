@@ -127,3 +127,15 @@ Claude Code ←→ MCP Server (stdio) ←→ CDP (localhost:9222) ←→ Trading
 ```
 
 Pine graphics path: `study._graphics._primitivesCollection.dwglines.get('lines').get(false)._primitivesDataById`
+
+<!-- STACK:BEGIN — auto-maintained, do not edit by hand -->
+## Stack (auto-maintained · updated 2026-07-01)
+- Language/runtime: JavaScript (Node.js, ESM — package.json "type": "module")
+- Protocol/transport: MCP server over stdio (@modelcontextprotocol/sdk)
+- CDP integration: chrome-remote-interface (Chrome DevTools Protocol, TradingView Desktop on port 9222)
+- Config: dotenv
+- Testing: node --test (built-in test runner)
+- Hosting: local-only
+
+## Stack Archive (moved away from)
+<!-- STACK:END -->
