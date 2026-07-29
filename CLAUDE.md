@@ -127,3 +127,18 @@ Claude Code ←→ MCP Server (stdio) ←→ CDP (localhost:9222) ←→ Trading
 ```
 
 Pine graphics path: `study._graphics._primitivesCollection.dwglines.get('lines').get(false)._primitivesDataById`
+
+
+<!-- STACK:BEGIN — auto-maintained, do not edit by hand -->
+## Stack (auto-maintained · updated 2026-07-29)
+- Language/runtime: Node.js (ES modules)
+- Framework: MCP server (@modelcontextprotocol/sdk, stdio transport)
+- Integration: Chrome DevTools Protocol (chrome-remote-interface → TradingView Desktop)
+- Testing: node --test (built-in runner)
+### Suspected (confirm)
+- Telegram notifications: raw HTTP in scripts/notify.js (TELEGRAM_BOT_TOKEN/CHAT_ID), no SDK
+- Gmail/SMTP: dynamic import('nodemailer') in scripts/notify.js, nodemailer not installed
+- Bitget exchange: HMAC-signed raw HTTPS in scalper-run.js (BITGET_* keys), no SDK
+
+## Stack Archive (moved away from)
+<!-- STACK:END -->
