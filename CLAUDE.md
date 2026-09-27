@@ -127,3 +127,14 @@ Claude Code ←→ MCP Server (stdio) ←→ CDP (localhost:9222) ←→ Trading
 ```
 
 Pine graphics path: `study._graphics._primitivesCollection.dwglines.get('lines').get(false)._primitivesDataById`
+
+<!-- STACK:BEGIN — auto-maintained, do not edit by hand -->
+## Stack (auto-maintained · updated 2026-09-27)
+- Language/runtime: JavaScript, Node.js (ESM)
+- Framework: none
+- Services: MCP (Model Context Protocol), Chrome DevTools Protocol (chrome-remote-interface)
+- Hosting: local-only
+- Testing: node:test (built-in test runner)
+
+## Stack Archive (moved away from)
+<!-- STACK:END -->
